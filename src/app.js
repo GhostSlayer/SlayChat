@@ -18,11 +18,12 @@ server = app.listen(port, () => logger.log('Listening on the port ' + port, { co
 const io = require('socket.io')(server);
 
 io.on('connection', (socket) => {
-  io.emit('chat message', 'A user has joined the chat');
+  // Send a message if user has joined the chat.
+  socket.broadcast.emit('chat message', "Administration: A user has joined the chat");
   logger.log('A user has joined the chat', { color: 'green', tags: ['Socket'] })
 
   socket.on('disconnect', () => {
-    io.emit('chat message', 'A user has left the chat');
+    socket.broadcast.emit('chat message', 'Administration: A user has left the chat');
     logger.log('A user has disconnected from the chat', { color: 'red', tags: ['Socket'] })
   });
 
