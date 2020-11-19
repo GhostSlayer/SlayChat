@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const chalk = require('chalk');
 const uuid = require('uuid');
 
-const port = 8080 || 3001;
+const port = 3000 || 3001;
 
 app.use(morgan(`${chalk.cyan('[HTTP]')} ${chalk.green(':method :url - IP :remote-addr - Code :status - Size :res[content-length] B - Handled in :response-time ms')}`))
 
