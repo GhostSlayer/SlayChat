@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 
+app.set('view engine', 'ejs');
+
 const logger = require('./utils/logger');
 const morgan = require('morgan');
 const chalk = require('chalk');
@@ -12,7 +14,11 @@ const PORT = process.env.PORT || 3001;
 app.use(morgan(`${chalk.cyan('[HTTP]')} ${chalk.green(':method :url - IP :remote-addr - Code :status - Size :res[content-length] B - Handled in :response-time ms')}`))
 
 app.get('/', (req, res) =>{
-  res.sendFile(__dirname + '/public/index.html');
+  res.render(__dirname + '/views/index');
+});
+
+app.get('/chat', (req, res) =>{
+  res.render(__dirname + '/views/chat');
 });
 
 server = app.listen(PORT, () => logger.log('Listening on the port ' + PORT, { color: 'green', tags: ['Server'] }));
